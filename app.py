@@ -154,6 +154,7 @@ def seed_db():
         db.execute("INSERT INTO settings (key, value) VALUES ('store_open', '1') ON CONFLICT(key) DO NOTHING")
         db.execute("INSERT INTO settings (key, value) VALUES ('store_name', 'Pod Rush') ON CONFLICT(key) DO NOTHING")
         db.execute("INSERT INTO settings (key, value) VALUES ('store_tagline', 'Catálogo e estoque em tempo real') ON CONFLICT(key) DO NOTHING")
+        db.execute("INSERT INTO settings (key, value) VALUES ('order_message', 'Olá! Quero pedir {produto}{opcao} por {preco}.') ON CONFLICT(key) DO NOTHING")
 
 
 def cart_state():
@@ -202,7 +203,7 @@ def common_context():
     _, _, cart_count = cart_details()
     settings = {row["key"]: row["value"] for row in product_rows("SELECT key,value FROM settings")}
     has_products = bool(product_rows("SELECT 1 FROM products WHERE active=1 LIMIT 1"))
-    return {"cart_count": cart_count, "has_products": has_products, "admin_logged_in": bool(session.get("shop_admin")), "store_name": settings.get("store_name", "Pod Rush"), "store_tagline": settings.get("store_tagline", "Loja oficial"), "whatsapp": ''.join(ch for ch in settings.get("whatsapp", "") if ch.isdigit()), "store_open": settings.get("store_open", "1") == "1", "today": datetime.now()}
+    return {"cart_count": cart_count, "has_products": has_products, "admin_logged_in": bool(session.get("shop_admin")), "store_name": settings.get("store_name", "Pod Rush"), "store_tagline": settings.get("store_tagline", "Loja oficial"), "whatsapp": ''.join(ch for ch in settings.get("whatsapp", "") if ch.isdigit()), "order_message": settings.get("order_message", "Olá! Quero pedir {produto}{opcao} por {preco}."), "store_open": settings.get("store_open", "1") == "1", "today": datetime.now()}
 
 
 @app.template_filter("product_image")
@@ -378,6 +379,7 @@ def admin_settings():
         name = request.form.get("store_name", "").strip()[:60]
         tagline = request.form.get("store_tagline", "").strip()[:100]
         whatsapp = ''.join(ch for ch in request.form.get("whatsapp", "") if ch.isdigit())[:15]
+        order_message = request.form.get("order_message", "").strip()[:500] or "Olá! Quero pedir {produto}{opcao} por {preco}."
         store_open = "1" if request.form.get("store_open") == "on" else "0"
         if not name:
             flash("O nome da loja não pode ficar vazio.", "error")
@@ -386,6 +388,7 @@ def admin_settings():
                 db.execute("INSERT INTO settings (key,value) VALUES ('store_name',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", (name,))
                 db.execute("INSERT INTO settings (key,value) VALUES ('store_tagline',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", (tagline,))
                 db.execute("INSERT INTO settings (key,value) VALUES ('whatsapp',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", (whatsapp,))
+                db.execute("INSERT INTO settings (key,value) VALUES ('order_message',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", (order_message,))
                 db.execute("INSERT INTO settings (key,value) VALUES ('store_open',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", (store_open,))
             flash("Identidade da loja atualizada.", "success")
             return redirect(url_for("admin_settings"))
