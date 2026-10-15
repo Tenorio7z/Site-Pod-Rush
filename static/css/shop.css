@@ -1,0 +1,1557 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg: #07080d;
+    --panel: #0e111a;
+    --panel2: #121725;
+    --line: #222b3b;
+    --ink: #f3f5fc;
+    --muted: #97a2b6;
+    --purple: #a83cf0;
+    --purple2: #6245f5;
+    --green: #059b70;
+    --green2: #00b987;
+    --font: 'DM Sans', Arial, sans-serif;
+    --display: 'Space Grotesk', 'DM Sans', Arial, sans-serif
+}
+
+* {
+    box-sizing: border-box
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 13px var(--font);
+    -webkit-font-smoothing: antialiased
+}
+
+a {
+    color: inherit;
+    text-decoration: none
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    border-bottom: 1px solid #ffffff13;
+    background: #080a13ed;
+    backdrop-filter: blur(18px)
+}
+
+.header-inner {
+    width: min(900px, calc(100% - 34px));
+    height: 70px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: auto
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: auto
+}
+
+.brand>img {
+    width: 42px;
+    height: 42px;
+    filter: drop-shadow(0 3px 10px #8854ff55)
+}
+
+.brand span {
+    display: grid;
+    gap: 3px
+}
+
+.brand b {
+    font: 700 16px var(--display)
+}
+
+.brand small {
+    color: #9baac0;
+    font-size: 9px
+}
+
+.store-state {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border: 1px solid #ffffff1d;
+    border-radius: 20px;
+    font-size: 9px
+}
+
+.store-state i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #14c79a;
+    box-shadow: 0 0 9px #13c99877
+}
+
+.store-state.is-closed i {
+    background: #ff637c;
+    box-shadow: 0 0 9px #ff637c77
+}
+
+.store-state.is-open {
+    color: #94e9ce;
+    border-color: #17b98a50
+}
+
+.store-state.is-closed {
+    color: #ff9cac;
+    border-color: #ed547250
+}
+
+.header-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-left: auto;
+    padding: 9px 14px;
+    border-radius: 9px;
+    background: #058e69;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    box-shadow: 0 4px 14px #008c6735
+}
+
+.header-whatsapp:hover,
+.whatsapp-order:not(.disabled):hover {
+    background: #00a97b
+}
+
+.admin-shortcut {
+    margin-left: 4px;
+    color: #a4aabe;
+    font-size: 9px
+}
+
+.admin-shortcut:hover {
+    color: #c893ff
+}
+
+.flash-wrap {
+    width: min(900px, calc(100% - 34px));
+    margin: 12px auto 0
+}
+
+.flash {
+    padding: 10px 13px;
+    border: 1px solid #286451;
+    border-radius: 8px;
+    background: #10241e;
+    color: #a4ebd1;
+    font-size: 11px
+}
+
+.flash.error {
+    border-color: #694054;
+    background: #291520;
+    color: #ffb5c9
+}
+
+.catalog-page {
+    width: min(900px, calc(100% - 34px));
+    margin: 25px auto 55px
+}
+
+.catalog-intro {
+    position: relative;
+    overflow: hidden;
+    padding: 28px 24px 20px;
+    border: 1px solid #66408b;
+    border-radius: 24px;
+    background: radial-gradient(ellipse at 98% 0, #301846ad, transparent 40%), radial-gradient(ellipse at 0 100%, #0a3540a8, transparent 38%), linear-gradient(120deg, #0e1119, #0c0e16 55%, #141020);
+    text-align: center;
+    box-shadow: 0 16px 45px #0004
+}
+
+.intro-badge {
+    width: max-content;
+    max-width: 100%;
+    margin: 0 auto 13px;
+    padding: 6px 12px;
+    border: 1px solid #9451c878;
+    border-radius: 22px;
+    background: #5124764a;
+    color: #dfc5f7;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .35px
+}
+
+.intro-badge i {
+    margin-right: 4px;
+    color: #f6cc49;
+    font-style: normal
+}
+
+.catalog-intro h1 {
+    margin: 0;
+    font: 700 clamp(26px, 4vw, 36px)/1.2 var(--display);
+    letter-spacing: -.8px
+}
+
+.catalog-intro h1 span {
+    background: linear-gradient(90deg, #e8d8ff, #a884ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent
+}
+
+.catalog-intro>p {
+    max-width: 550px;
+    margin: 12px auto 20px;
+    color: #aab4c6;
+    font-size: 12px;
+    line-height: 1.55
+}
+
+.catalog-controls {
+    display: flex;
+    align-items: center;
+    gap: 9px
+}
+
+.catalog-search {
+    height: 40px;
+    min-width: 180px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 11px;
+    border: 1px solid #344056;
+    border-radius: 10px;
+    background: #111827;
+    text-align: left
+}
+
+.catalog-search>span {
+    color: #94a6bf;
+    font-size: 21px
+}
+
+.catalog-search input {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: white;
+    font-size: 10px
+}
+
+.catalog-search input::placeholder {
+    color: #8a96aa
+}
+
+.catalog-search button {
+    border: 0;
+    background: transparent;
+    color: #a9b7ca;
+    font-size: 16px;
+    cursor: pointer
+}
+
+.category-filters {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow-x: auto
+}
+
+.filter-chip {
+    flex: none;
+    padding: 9px 12px;
+    border: 1px solid #263143;
+    border-radius: 20px;
+    background: #1a2434;
+    color: #cad1dd;
+    font-size: 9px;
+    font-weight: 600;
+    white-space: nowrap
+}
+
+.filter-chip:hover {
+    border-color: #8754ce
+}
+
+.filter-chip.active {
+    border-color: #a83cf0;
+    background: linear-gradient(120deg, #a334ea, #6748eb);
+    color: #fff
+}
+
+.catalog-results {
+    padding-top: 22px
+}
+
+.result-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 11px;
+    color: #9ba7ba;
+    font-size: 9px
+}
+
+.result-caption select {
+    padding: 7px 9px;
+    border: 1px solid #273145;
+    border-radius: 7px;
+    background: #101522;
+    color: #bdc7d8;
+    font-size: 9px
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px
+}
+
+.product-card {
+    min-width: 0;
+    padding: 14px 15px 13px;
+    border: 1px solid #263143;
+    border-radius: 17px;
+    background: linear-gradient(145deg, #0e1118, #0c0f16);
+    transition: transform .2s, border-color .2s, box-shadow .2s
+}
+
+.product-card:hover {
+    transform: translateY(-2px);
+    border-color: #7541a0;
+    box-shadow: 0 12px 25px #0003
+}
+
+.product-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    min-height: 27px
+}
+
+.product-name {
+    display: block;
+    color: #f3f4fa;
+    font: 700 11px var(--display);
+    text-transform: uppercase
+}
+
+.product-badge {
+    display: inline-block;
+    margin-top: 7px;
+    padding: 3px 7px;
+    border: 1px solid #8542ba;
+    border-radius: 3px;
+    background: #51256d5c;
+    color: #e4c4ff;
+    font-size: 8px;
+    letter-spacing: .5px;
+    text-transform: uppercase
+}
+
+.price-pill {
+    flex: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: linear-gradient(100deg, #a630e8, #6346ef);
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap
+}
+
+.product-image-link {
+    display: block;
+    margin: 10px 0 8px
+}
+
+.product-image {
+    width: 100%;
+    height: 145px;
+    display: block;
+    border: 1px solid #1e2634;
+    border-radius: 10px;
+    background: #111722;
+    object-fit: cover
+}
+
+.product-description {
+    margin: 5px 0 10px;
+    color: #a3aec0;
+    font-size: 10px;
+    line-height: 1.5
+}
+
+.options-label {
+    margin: 9px 0 6px;
+    color: #a9b8cc;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 1.1px
+}
+
+.option-list {
+    min-height: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 11px
+}
+
+.option-chip {
+    padding: 5px 8px;
+    border: 1px solid #29354a;
+    border-radius: 6px;
+    background: #111a29;
+    color: #d3ddeb;
+    font-size: 8px;
+    line-height: 1.2;
+    cursor: pointer
+}
+
+.option-chip:hover,
+.option-chip.selected {
+    border-color: #8555cc;
+    background: #2a1b41;
+    color: #e7d6ff
+}
+
+.whatsapp-order {
+    width: 100%;
+    min-height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+    border: 0;
+    border-radius: 11px;
+    background: #079b71;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    box-shadow: 0 5px 17px #009e7030;
+    transition: background .2s, transform .2s
+}
+
+.whatsapp-order:hover {
+    transform: translateY(-1px)
+}
+
+.whatsapp-order.disabled {
+    background: #253040;
+    color: #8b96a7;
+    box-shadow: none;
+    cursor: not-allowed
+}
+
+.catalog-empty {
+    grid-column: 1/-1;
+    min-height: 215px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 22px;
+    border: 1px dashed #3b3153;
+    border-radius: 15px;
+    background: #0d1018;
+    text-align: center
+}
+
+.catalog-empty>span {
+    width: 35px;
+    height: 35px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 10px;
+    border-radius: 11px;
+    background: #281b3b;
+    color: #c69cff;
+    font-size: 17px
+}
+
+.catalog-empty h2 {
+    margin: 0 0 6px;
+    font: 600 16px var(--display)
+}
+
+.catalog-empty p {
+    margin: 0;
+    color: #96a0b1;
+    font-size: 10px
+}
+
+.catalog-empty>a {
+    margin-top: 12px;
+    color: #c69cff;
+    font-size: 10px
+}
+
+.site-footer {
+    border-top: 1px solid #ffffff12;
+    background: #080a11
+}
+
+.footer-brand,
+.footer-meta {
+    width: min(900px, calc(100% - 34px));
+    display: flex;
+    align-items: center;
+    margin: auto
+}
+
+.footer-brand {
+    gap: 8px;
+    padding: 18px 0 10px;
+    color: #c0cada;
+    font-size: 9px
+}
+
+.footer-brand img {
+    width: 21px;
+    height: 21px
+}
+
+.footer-meta {
+    justify-content: space-between;
+    padding-bottom: 16px;
+    color: #8792a4;
+    font-size: 8px
+}
+
+.footer-meta a {
+    color: #a98ad3
+}
+
+.admin-page {
+    width: min(1040px, calc(100% - 34px));
+    min-height: 70vh;
+    margin: 28px auto 50px
+}
+
+.admin-page-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 0 0 17px
+}
+
+.admin-page-head>div:first-child {
+    display: grid;
+    gap: 6px
+}
+
+.admin-page-head h1 {
+    margin: 0;
+    font: 700 26px var(--display)
+}
+
+.admin-page-head>a {
+    color: #bda0e8;
+    font-size: 10px
+}
+
+.admin-kicker {
+    color: #ae8bdd;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.5px
+}
+
+.admin-head-actions {
+    display: flex;
+    align-items: center;
+    gap: 13px
+}
+
+.admin-head-actions>a:not(.admin-primary),
+.admin-head-actions button {
+    border: 0;
+    background: none;
+    color: #acb4c4;
+    font-size: 9px;
+    cursor: pointer
+}
+
+.admin-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 35px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 7px;
+    background: linear-gradient(110deg, #963de0, #6650e5);
+    color: white;
+    font-size: 9px;
+    font-weight: 700
+}
+
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 12px
+}
+
+.admin-stats article {
+    display: grid;
+    gap: 7px;
+    padding: 13px;
+    border: 1px solid #252e3e;
+    border-radius: 11px;
+    background: #10131c
+}
+
+.admin-stats span {
+    color: #9ba5b7;
+    font-size: 9px
+}
+
+.admin-stats b {
+    font: 700 20px var(--display)
+}
+
+.admin-panel {
+    margin-bottom: 13px;
+    overflow: hidden;
+    border: 1px solid #242d3c;
+    border-radius: 12px;
+    background: #0d1018
+}
+
+.admin-panel-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 15px;
+    border-bottom: 1px solid #222a38
+}
+
+.admin-panel-title h2 {
+    margin: 4px 0 0;
+    font: 600 16px var(--display)
+}
+
+.admin-panel-title>a {
+    color: #c49af4;
+    font-size: 9px
+}
+
+.admin-table-scroll {
+    overflow: auto
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left
+}
+
+.admin-table th {
+    padding: 9px 10px;
+    color: #8e9aaf;
+    font-size: 8px;
+    letter-spacing: .7px;
+    text-transform: uppercase
+}
+
+.admin-table td {
+    padding: 10px;
+    border-top: 1px solid #ffffff0d;
+    color: #aab3c2;
+    font-size: 9px;
+    white-space: nowrap
+}
+
+.admin-table td small {
+    display: block;
+    margin-top: 4px;
+    color: #8490a3;
+    font-size: 8px
+}
+
+.admin-table td>a,
+.admin-table td form button {
+    border: 0;
+    background: none;
+    color: #c39bfa;
+    font-size: 8px;
+    cursor: pointer
+}
+
+.admin-table td form button {
+    display: block;
+    margin-top: 4px;
+    color: #da92a5
+}
+
+.admin-product-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 260px;
+    white-space: normal
+}
+
+.admin-product-cell>img,
+.admin-product-cell>span {
+    width: 32px;
+    height: 32px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    border-radius: 6px;
+    background: #241a36;
+    object-fit: cover;
+    color: #c9a3ff;
+    font-weight: 700
+}
+
+.admin-product-cell b {
+    display: block;
+    color: #e8eaf1;
+    font-size: 9px
+}
+
+.admin-product-cell small {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.admin-state {
+    padding: 4px 7px;
+    border-radius: 15px;
+    background: #29212a;
+    color: #d5a3b1;
+    font-size: 8px
+}
+
+.admin-state.active {
+    background: #123128;
+    color: #8ee2c0
+}
+
+.admin-empty {
+    padding: 27px !important;
+    text-align: center
+}
+
+.admin-empty a {
+    color: #c39bfa !important
+}
+
+.order-status-form {
+    display: flex;
+    gap: 4px
+}
+
+.order-status-form select {
+    max-width: 110px;
+    padding: 5px;
+    border: 1px solid #333b4b;
+    border-radius: 5px;
+    background: #131724;
+    color: #d7dce7;
+    font-size: 8px
+}
+
+.settings-panel {
+    max-width: 650px;
+    padding: 19px
+}
+
+.settings-form {
+    display: grid;
+    gap: 13px
+}
+
+.settings-form label {
+    display: grid;
+    gap: 6px;
+    color: #c5cad5;
+    font-size: 10px
+}
+
+.settings-form input:not([type=checkbox]),
+.settings-form textarea {
+    width: 100%;
+    min-height: 37px;
+    padding: 9px 10px;
+    border: 1px solid #30384a;
+    border-radius: 6px;
+    outline-color: #9460d3;
+    background: #090c13;
+    color: #f4f2f8;
+    font-size: 10px
+}
+
+.settings-form textarea {
+    resize: vertical
+}
+
+.settings-form small {
+    color: #8e98aa;
+    font-size: 8px
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 11px
+}
+
+.toggle-row {
+    display: flex !important;
+    align-items: center;
+    gap: 9px
+}
+
+.toggle-row input {
+    accent-color: #9645e5
+}
+
+.settings-form .admin-primary {
+    justify-self: start;
+    padding-inline: 18px
+}
+
+.login-card {
+    width: min(390px, calc(100% - 34px));
+    margin: 50px auto;
+    padding: 23px;
+    border: 1px solid #282f40;
+    border-radius: 14px;
+    background: #0e1119
+}
+
+.login-card img {
+    width: 55px;
+    height: 55px
+}
+
+.login-card h1 {
+    margin: 8px 0;
+    font: 700 22px var(--display)
+}
+
+.login-card p,
+.login-card small {
+    color: #9aa4b5;
+    font-size: 9px
+}
+
+.login-card form {
+    display: grid;
+    gap: 12px;
+    margin-top: 17px
+}
+
+.login-card label {
+    display: grid;
+    gap: 6px;
+    color: #c5cad5;
+    font-size: 9px
+}
+
+.login-card input {
+    min-height: 38px;
+    padding: 9px;
+    border: 1px solid #30384a;
+    border-radius: 6px;
+    background: #090c13;
+    color: white
+}
+
+.login-card button {
+    min-height: 38px;
+    border: 0;
+    border-radius: 7px;
+    background: linear-gradient(110deg, #963de0, #6650e5);
+    color: white;
+    font-size: 10px;
+    font-weight: 700
+}
+
+.login-card small code {
+    color: #c69cff
+}
+
+@media(max-width:700px) {
+    .header-inner {
+        height: 62px
+    }
+
+    .brand>img {
+        width: 37px;
+        height: 37px
+    }
+
+    .brand b {
+        font-size: 14px
+    }
+
+    .brand small {
+        font-size: 8px
+    }
+
+    .header-whatsapp {
+        margin-left: 0;
+        padding: 8px 9px;
+        font-size: 0
+    }
+
+    .header-whatsapp:first-letter {
+        font-size: 15px
+    }
+
+    .admin-shortcut {
+        font-size: 8px
+    }
+
+    .catalog-page {
+        margin-top: 16px
+    }
+
+    .catalog-intro {
+        padding: 23px 13px 14px;
+        border-radius: 18px
+    }
+
+    .catalog-intro h1 {
+        font-size: 25px
+    }
+
+    .catalog-intro>p {
+        max-width: 390px;
+        font-size: 10px
+    }
+
+    .catalog-controls {
+        align-items: stretch;
+        flex-direction: column
+    }
+
+    .catalog-search {
+        height: 38px
+    }
+
+    .category-filters {
+        padding-bottom: 2px
+    }
+
+    .product-grid {
+        gap: 9px
+    }
+
+    .product-card {
+        padding: 10px;
+        border-radius: 13px
+    }
+
+    .product-image {
+        height: 115px
+    }
+
+    .product-name {
+        font-size: 9px
+    }
+
+    .price-pill {
+        padding: 4px 7px;
+        font-size: 8px
+    }
+
+    .product-description {
+        font-size: 9px
+    }
+
+    .option-chip {
+        font-size: 7px
+    }
+
+    .whatsapp-order {
+        min-height: 35px;
+        font-size: 8px
+    }
+
+    .admin-page-head {
+        align-items: flex-start;
+        flex-direction: column
+    }
+
+    .admin-head-actions {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 8px
+    }
+
+    .admin-stats article {
+        padding: 10px
+    }
+
+    .admin-stats b {
+        font-size: 16px
+    }
+
+    .settings-grid {
+        grid-template-columns: 1fr
+    }
+}
+
+@media(max-width:390px) {
+    .header-inner {
+        gap: 8px
+    }
+
+    .brand {
+        gap: 6px
+    }
+
+    .brand>img {
+        width: 32px;
+        height: 32px
+    }
+
+    .brand b {
+        font-size: 12px
+    }
+
+    .brand small {
+        font-size: 7px
+    }
+
+    .store-state {
+        padding: 5px 7px;
+        font-size: 8px
+    }
+
+    .header-whatsapp {
+        padding: 8px
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr
+    }
+
+    .product-image {
+        height: 170px
+    }
+
+    .product-name {
+        font-size: 11px
+    }
+
+    .price-pill {
+        font-size: 9px
+    }
+
+    .option-chip {
+        font-size: 8px
+    }
+}
+
+.wa-icon {
+    width: 14px;
+    height: 14px;
+    flex: none
+}
+
+.product-page {
+    max-width: 760px
+}
+
+.back-link {
+    display: inline-block;
+    margin: 0 0 14px;
+    color: #bda0e8;
+    font-size: 10px
+}
+
+.product-detail-card {
+    display: grid;
+    grid-template-columns: minmax(220px, .8fr) 1fr;
+    gap: 22px;
+    padding: 16px;
+    border: 1px solid #273144;
+    border-radius: 16px;
+    background: #0e1119
+}
+
+.product-detail-card>img {
+    width: 100%;
+    height: 280px;
+    border-radius: 11px;
+    background: #141925;
+    object-fit: cover
+}
+
+.product-detail-card h1 {
+    font: 700 22px var(--display)
+}
+
+.product-detail-card>div>strong {
+    color: #fff;
+    font-size: 15px
+}
+
+.product-detail-card>div>p {
+    color: #a3aec0;
+    font-size: 11px;
+    line-height: 1.6
+}
+
+@media(max-width:560px) {
+    .product-detail-card {
+        grid-template-columns: 1fr
+    }
+
+    .product-detail-card>img {
+        height: 210px
+    }
+}
+
+.brand b {
+    color: #dec6ff
+}
+
+.upload-preview {
+    width: min(100%, 300px);
+    height: 145px;
+    border: 1px solid #343049;
+    border-radius: 9px;
+    background: #111722;
+    object-fit: contain
+}
+
+.admin-shortcut {
+    display: none !important
+}
+
+/* Pod Rush: identidade escura, vidro e acentos roxos */
+:root {
+    --bg: #050507;
+    --panel: rgba(16, 15, 23, .78);
+    --panel2: rgba(25, 20, 35, .78);
+    --line: rgba(179, 128, 255, .2);
+    --purple: #a855f7;
+    --purple2: #7040d8
+}
+
+body {
+    background: radial-gradient(ellipse at 50% -25%, #211232 0, transparent 44%), #050507
+}
+
+.site-header {
+    background: rgba(7, 6, 11, .82);
+    border-bottom-color: rgba(190, 145, 255, .15)
+}
+
+.catalog-intro,
+.product-card,
+.product-detail-card,
+.admin-panel,
+.admin-stats article,
+.login-card,
+.catalog-empty {
+    background: linear-gradient(145deg, rgba(24, 21, 32, .82), rgba(10, 10, 15, .74));
+    border-color: rgba(180, 133, 244, .19);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: inset 0 1px rgba(255, 255, 255, .045), 0 16px 38px rgba(0, 0, 0, .22)
+}
+
+.catalog-intro {
+    position: relative;
+    overflow: hidden
+}
+
+.catalog-intro:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 85% 0, rgba(133, 54, 210, .16), transparent 42%);
+}
+
+.catalog-intro>* {
+    position: relative
+}
+
+.product-card {
+    transition: transform .25s, border-color .25s, background .25s
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(183, 119, 255, .43);
+    background: linear-gradient(145deg, rgba(31, 25, 43, .9), rgba(12, 11, 18, .82))
+}
+
+.product-image {
+    background: rgba(7, 7, 11, .62);
+    border-color: rgba(178, 136, 236, .14)
+}
+
+.price-pill,
+.filter-chip.active,
+.admin-primary,
+.login-card button {
+    background: linear-gradient(120deg, #a34bf2, #7045d7)
+}
+
+.filter-chip,
+.option-chip {
+    border-color: rgba(171, 132, 222, .18);
+    background: rgba(21, 19, 29, .76)
+}
+
+.option-chip:hover,
+.option-chip.selected {
+    border-color: #a855f7;
+    background: rgba(106, 55, 157, .28);
+    color: #ead9ff
+}
+
+.intro-badge,
+.product-badge {
+    border-color: rgba(174, 112, 244, .3);
+    background: rgba(113, 57, 158, .18);
+    color: #dfc2ff
+}
+
+.catalog-search,
+.catalog-results select,
+.settings-form input:not([type=checkbox]),
+.settings-form textarea,
+.login-card input,
+.order-status-form select {
+    border-color: rgba(177, 137, 230, .19);
+    background: rgba(12, 11, 17, .84)
+}
+
+.brand b,
+.product-name:hover,
+.footer-meta a,
+.admin-page-head>a,
+.back-link {
+    color: #c895ff
+}
+
+.admin-panel-title,
+.admin-table td {
+    border-color: rgba(255, 255, 255, .07)
+}
+
+/* Abertura */
+.brand-intro {
+    display: none
+}
+
+html.intro-pending .brand-intro {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #100b18 0, #070609 56%, #040405 100%);
+    animation: intro-out .7s ease 2.15s forwards
+}
+
+.intro-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+    animation: brand-arrive 1.15s cubic-bezier(.2, .8, .2, 1) both
+}
+
+.intro-content img {
+    width: 104px;
+    height: 104px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 28px rgba(168, 85, 247, .58));
+    animation: logo-pulse 2.1s ease-in-out infinite alternate
+}
+
+.intro-content>span {
+    color: #f7f3fc;
+    font: 700 clamp(30px, 7vw, 54px)/1 var(--display);
+    letter-spacing: .12em;
+    text-shadow: 0 0 25px rgba(164, 91, 241, .35)
+}
+
+.intro-content>span b {
+    color: #b56af7
+}
+
+.intro-content small {
+    color: #a99ab8;
+    font-size: 9px;
+    letter-spacing: .38em
+}
+
+.smoke {
+    position: absolute;
+    width: min(58vw, 600px);
+    height: min(58vw, 600px);
+    border-radius: 50%;
+    filter: blur(58px);
+    opacity: 0;
+    background: radial-gradient(ellipse, rgba(126, 53, 186, .36), rgba(98, 48, 148, .18) 35%, transparent 70%);
+    animation: smoke-drift 3.8s ease-in-out infinite alternate
+}
+
+.smoke-one {
+    left: 8%;
+    top: 7%;
+    animation-delay: -.6s
+}
+
+.smoke-two {
+    right: 3%;
+    bottom: 0;
+    transform: scale(.85);
+    background: radial-gradient(ellipse, rgba(92, 58, 183, .3), rgba(141, 54, 173, .15) 36%, transparent 70%);
+    animation-delay: -1.7s
+}
+
+.smoke-three {
+    left: 34%;
+    top: 35%;
+    transform: scale(.72);
+    animation-delay: -2.4s
+}
+
+@keyframes brand-arrive {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(.94);
+        filter: blur(8px)
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+        filter: blur(0)
+    }
+}
+
+@keyframes logo-pulse {
+    from {
+        transform: scale(.97)
+    }
+
+    to {
+        transform: scale(1.04)
+    }
+}
+
+@keyframes smoke-drift {
+    0% {
+        opacity: 0;
+        translate: -5% 4%;
+        scale: .78
+    }
+
+    35% {
+        opacity: .95
+    }
+
+    100% {
+        opacity: .55;
+        translate: 7% -5%;
+        scale: 1.12
+    }
+}
+
+@keyframes intro-out {
+    to {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    html.intro-pending .brand-intro {
+        animation: intro-out .2s linear .8s forwards
+    }
+
+    .intro-content,
+    .intro-content img,
+    .smoke {
+        animation-duration: .01ms;
+        animation-iteration-count: 1
+    }
+}
+
+/* Corrige o botão e o ícone do WhatsApp */
+.header-whatsapp {
+    height: 38px !important;
+    min-height: 38px !important;
+    padding: 0 14px !important;
+    flex: 0 0 auto !important;
+    white-space: nowrap;
+}
+
+.header-whatsapp .wa-icon,
+.whatsapp-order .wa-icon {
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+    max-width: 16px !important;
+    min-height: 16px !important;
+    max-height: 16px !important;
+    flex: 0 0 16px !important;
+}
+
+.whatsapp-order {
+    height: 39px !important;
+    min-height: 39px !important;
+    max-height: 39px !important;
+    padding: 0 12px !important;
+    overflow: hidden;
+}
+
+@media (max-width: 700px) {
+    .header-whatsapp {
+        width: 38px !important;
+        padding: 0 !important;
+        justify-content: center;
+    }
+
+    .header-whatsapp span {
+        display: none;
+    }
+}
+/* Catálogo direto: logo no cabeçalho e foco imediato nos produtos */
+.products-toolbar{display:flex;align-items:end;justify-content:space-between;gap:22px;margin:28px 0 16px;padding:0 2px}
+.products-heading{display:grid;gap:5px}.products-heading h1{margin:0;font:700 clamp(23px,4vw,30px)/1.1 var(--display);letter-spacing:-.04em}.section-kicker{color:#b982f3;font-size:8px;font-weight:700;letter-spacing:.2em}
+.products-toolbar .catalog-controls{width:min(380px,52%);margin:0}.products-toolbar .catalog-search{width:100%;height:40px;border-radius:10px}
+.catalog-results{margin-top:0}.catalog-empty{min-height:150px;padding:22px}.catalog-empty>span{width:30px;height:30px;font-size:14px}.catalog-empty h2{font-size:15px}.catalog-empty p{max-width:340px;line-height:1.5}
+@media(max-width:600px){.products-toolbar{align-items:stretch;flex-direction:column;gap:12px;margin-top:20px}.products-toolbar .catalog-controls{width:100%}.products-toolbar .catalog-search{height:39px}}
+
+
+/* Rodapé Pod Rush */
+.site-footer {
+    margin-top: 48px;
+    border-top: 1px solid rgba(176, 119, 235, 0.2);
+    background: rgba(10, 8, 14, 0.92);
+}
+
+.footer-brand,
+.footer-meta {
+    width: min(900px, calc(100% - 34px));
+    margin-inline: auto;
+}
+
+.footer-brand {
+    gap: 10px;
+    padding: 20px 0 8px;
+    color: #e7dcf4;
+    font-size: 11px;
+}
+
+.footer-brand img {
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
+}
+
+.footer-meta {
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 0 18px;
+    color: #92869f;
+    font-size: 10px;
+}
+
+.footer-meta a {
+    color: #c58bff;
+}
+
+.footer-meta a:hover {
+    color: #e2c5ff;
+    text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+    .footer-brand,
+    .footer-meta {
+        width: calc(100% - 32px);
+    }
+
+    .footer-meta {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.catalog-page,
+.admin-page,
+.page-main {
+    flex: 1 0 auto;
+}
+
+.site-footer {
+    flex: 0 0 auto;
+    margin-top: auto;
+}
+/* Logo Pod Rush maior, com o fundo escuro integrado à página */
+.header-inner{height:86px}
+.brand{gap:12px}
+.brand>img{width:68px;height:68px;object-fit:contain;mix-blend-mode:screen;filter:drop-shadow(0 0 16px rgba(157,61,231,.38))}
+.site-header{background:rgba(10,5,16,.9)}
+.footer-brand img{width:48px;height:48px;object-fit:contain;mix-blend-mode:screen;filter:drop-shadow(0 0 12px rgba(157,61,231,.3))}
+.intro-content img{width:clamp(250px,38vw,410px);height:auto;aspect-ratio:911/960;object-fit:contain;mix-blend-mode:screen;filter:drop-shadow(0 0 34px rgba(157,61,231,.44));animation:logo-pulse 2.1s ease-in-out infinite alternate}
+.intro-content>span,.intro-content small{display:none}
+html.intro-pending .brand-intro{background:radial-gradient(ellipse at 50% 45%,#190b25 0,#0c0711 48%,#050507 100%)}
+@media(max-width:700px){.header-inner{height:76px}.brand>img{width:58px;height:58px}}
+@media(max-width:390px){.header-inner{height:70px}.brand>img{width:52px;height:52px}}

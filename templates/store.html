@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block title %}Produtos{% endblock %}
+{% block content %}
+<div class="brand-intro" id="brand-intro" aria-label="Pod Rush">
+    <div class="smoke smoke-one"></div><div class="smoke smoke-two"></div><div class="smoke smoke-three"></div>
+    <div class="intro-content"><img src="{{ url_for('static',filename='img/podrush-logo.png') }}" alt="Logo Pod Rush"><span>POD <b>RUSH</b></span><small>CATÁLOGO OFICIAL</small></div>
+</div>
+<main class="catalog-page">
+    <section class="products-toolbar">
+        <div class="products-heading"><span class="section-kicker">POD RUSH</span><h1>Produtos</h1></div>
+        <form class="catalog-controls" action="{{ url_for('home') }}" method="get">
+            <label class="catalog-search"><span>⌕</span><input name="q" value="{{ q }}" placeholder="Pesquisar produtos..." aria-label="Pesquisar produtos"><button type="submit" aria-label="Pesquisar">→</button></label>
+        </form>
+    </section>
+    <section class="catalog-results" id="produtos">
+        <div class="result-caption"><span>{{ products|length }} produto{{ '' if products|length==1 else 's' }}</span><select aria-label="Ordenar produtos" onchange="location.href=this.value"><option value="{{ url_for('home',q=q or None,category=category or None,sort='featured') }}" {% if sort=='featured' %}selected{% endif %}>Em destaque</option><option value="{{ url_for('home',q=q or None,category=category or None,sort='newest') }}" {% if sort=='newest' %}selected{% endif %}>Mais recentes</option><option value="{{ url_for('home',q=q or None,category=category or None,sort='price_asc') }}" {% if sort=='price_asc' %}selected{% endif %}>Menor preço</option><option value="{{ url_for('home',q=q or None,category=category or None,sort='price_desc') }}" {% if sort=='price_desc' %}selected{% endif %}>Maior preço</option></select></div>
+        <div class="product-grid">
+        {% for product in products %}
+            <article class="product-card">
+                <div class="product-card-top"><div><a href="{{ url_for('product_page',product_id=product.id) }}" class="product-name">{{ product.name }}</a>{% if product.badge %}<span class="product-badge">{{ product.badge }}</span>{% endif %}</div><span class="price-pill">{{ product.price|money }}</span></div>
+                <a class="product-image-link" href="{{ url_for('product_page',product_id=product.id) }}"><img class="product-image" src="{{ product.image|product_image }}" alt="{{ product.name }}" loading="lazy"></a>
+                {% if product.description %}<p class="product-description">{{ product.description }}</p>{% endif %}
+                {% set options=product.flavors.splitlines() %}
+                {% if options and options[0] %}<div class="options-label">OPÇÕES DISPONÍVEIS</div><div class="option-list">{% for option in options %}<button class="option-chip {% if loop.first %}selected{% endif %}" type="button" data-option="{{ option }}">{{ option }}</button>{% endfor %}</div>{% endif %}
+                <a class="whatsapp-order {% if not whatsapp or not store_open or product.stock<1 %}disabled{% endif %}" href="{% if whatsapp and store_open and product.stock>0 %}https://wa.me/{{ whatsapp }}?text={{ ('Olá! Quero pedir ' ~ product.name ~ ((' — opção: ' ~ options[0]) if options and options[0] else '') ~ ' por ' ~ (product.price|money) ~ '.')|urlencode }}{% else %}#{% endif %}" data-phone="{{ whatsapp }}" data-name="{{ product.name }}" data-price="{{ product.price|money }}" data-option="{{ options[0] if options and options[0] else '' }}"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.1 1.6 5.9L0 24l6.5-1.7a11.9 11.9 0 0 0 5.6 1.4h.1C18.7 23.7 24 18.4 24 11.9a11.8 11.8 0 0 0-3.5-8.4ZM12.2 21.7a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.3-.4a9.8 9.8 0 1 1 8.5 4.7Zm5.4-7.3c-.3-.1-1.8-.9-2.1-1s-.5-.1-.7.1-.8 1-1 1.1-.4.2-.7.1a8.1 8.1 0 0 1-2.4-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6l.5-.6.3-.5c.1-.2 0-.4 0-.6l-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.2-1.2 2.8 1.3 3.2 1.5 3.4c.2.2 2.5 3.8 6.1 5.3.9.4 1.6.6 2.1.7.9.3 1.7.2 2.3.1.7-.1 1.8-.8 2.1-1.5.3-.7.3-1.3.2-1.5s-.3-.3-.6-.5Z"/></svg><span>{% if product.stock<1 %}Indisponível{% elif not store_open %}Loja fechada{% elif not whatsapp %}WhatsApp não configurado{% else %}Pedir este produto no WhatsApp{% endif %}</span></a>
+            </article>
+        {% else %}
+            <div class="catalog-empty"><span>✦</span><h2>{% if q %}Nenhum produto encontrado{% else %}Novidades em breve{% endif %}</h2><p>{% if q %}Tente outra busca.{% else %}Os produtos do Pod Rush estarão aqui em breve.{% endif %}</p>{% if q %}<a href="{{ url_for('home') }}">Ver todos os produtos</a>{% endif %}</div>
+        {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}
+{% block scripts %}<script>document.querySelectorAll('.option-chip').forEach(chip=>chip.addEventListener('click',()=>{const card=chip.closest('.product-card');card.querySelectorAll('.option-chip').forEach(option=>option.classList.remove('selected'));chip.classList.add('selected');const link=card.querySelector('.whatsapp-order');link.dataset.option=chip.dataset.option;if(link.dataset.phone){const text='Olá! Quero pedir '+link.dataset.name+(chip.dataset.option?' — opção: '+chip.dataset.option:'')+' por '+link.dataset.price+'.';link.href='https://wa.me/'+link.dataset.phone+'?text='+encodeURIComponent(text)}}));const brandIntro=document.getElementById('brand-intro');if(brandIntro){if(document.documentElement.classList.contains('intro-pending')){try{sessionStorage.setItem('podrushIntroSeen','1')}catch(e){}setTimeout(()=>brandIntro.classList.add('is-leaving'),2100);setTimeout(()=>{brandIntro.remove();document.documentElement.classList.remove('intro-pending')},2850)}else brandIntro.remove()}</script>{% endblock %}

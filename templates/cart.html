@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block title %}Sua sacola{% endblock %}
+{% block content %}
+<main class="wrap page-main">
+    <div class="breadcrumbs"><a href="{{ url_for('home') }}">Loja</a><span>/</span><b>Sua sacola</b></div>
+    <header class="page-title"><span class="eyebrow">BOAS ESCOLHAS</span>
+        <h1>Sua sacola<span>.</span></h1>
+    </header>{% if items %}<div class="cart-layout">
+        <section class="cart-items">
+            <form method="post" action="{{ url_for('update_cart') }}">{% for item in items %}<article class="cart-row">
+                    <a class="cart-art product-art art-{{ item.product.image }}"
+                        style="background-image:url('{{ url_for(" product_art", image_key=item.product.image) }}')"
+                        href="{{ url_for('product_page',product_id=item.product.id) }}"><span class="art-stamp">POD
+                            RUSH<br>SHOP <i>✳</i></span>
+                        <div class="art-illustration"></div>
+                    </a>
+                    <div class="cart-product"><span class="product-category">{{ item.product.category }}</span><a
+                            href="{{ url_for('product_page',product_id=item.product.id) }}"><b>{{ item.product.name
+                                }}</b></a><small>{{ item.product.price|money }} cada</small><button class="remove-link"
+                            form="remove-{{ item.product.id }}">Remover</button></div><input class="quantity-input"
+                        type="number" name="quantity_{{ item.product.id }}" min="0" max="{{ item.product.stock }}"
+                        value="{{ item.quantity }}" aria-label="Quantidade de {{ item.product.name }}"><strong
+                        class="line-price">{{ item.line_total|money }}</strong>
+                </article>{% endfor %}<button class="update-cart" type="submit">Atualizar quantidades ↻</button></form>
+            {% for item in items %}<form id="remove-{{ item.product.id }}" method="post"
+                action="{{ url_for('remove_from_cart',product_id=item.product.id) }}"></form>{% endfor %}<a
+                class="continue-link" href="{{ url_for('home') }}">← Continuar descobrindo</a>
+        </section>
+        <aside class="order-summary"><span class="eyebrow">QUASE SEU</span>
+            <h2>Resumo</h2>
+            <div><span>Subtotal · {{ count }} itens</span><b>{{ subtotal|money }}</b></div>
+            <div><span>Entrega</span><b>{% if subtotal>=15000 %}Grátis{% else %}{{ 1490|money }}{% endif %}</b></div>
+            <p class="shipping-hint">{% if subtotal>=15000 %}Seu frete é por nossa conta. ✳{% else %}Mais {{
+                (15000-subtotal)|money }} para ganhar frete grátis.{% endif %}</p>
+            <div class="summary-total"><span>Total estimado</span><b>{{ (subtotal + (0 if subtotal>=15000 else
+                    1490))|money }}</b></div><a class="button button-dark checkout-button"
+                href="{{ url_for('checkout') }}">Continuar para entrega <span>→</span></a><small
+                class="local-note">Compra de demonstração · sem cobrança</small>
+        </aside>
+    </div>{% else %}<div class="empty-cart">
+        <div>♧</div><span class="eyebrow">SUA SACOLA ESTÁ VAZIA</span>
+        <h2>Sua sacola está vazia<span>.</span></h2>
+        <p>Tem tanta coisa por aí — vamos encontrar algo bom?</p><a class="button button-dark"
+            href="{{ url_for('home') }}">Voltar para a loja <span>→</span></a>
+    </div>{% endif %}
+</main>
+{% endblock %}

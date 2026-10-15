@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: pod-rush
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 120 app:app
+    healthCheckPath: /
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: DATABASE_URL
+        fromDatabase:
+          name: pod-rush-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: SHOP_ADMIN_PASSWORD
+        sync: false
+
+databases:
+  - name: pod-rush-db
+    databaseName: podrush
+    user: podrush
+    plan: free
+    ipAllowList: []

@@ -1,0 +1,4 @@
+{% extends "layout.html" %}
+{% block title %}Acesso admin{% endblock %}
+{% block content %}<main class="wrap page-main"><section class="login-card fade-in"><img class="admin-login-logo" src="{{ url_for('static', filename='img/podrush-logo.png') }}" alt=""><span class="eyebrow">POD RUSH · ADMIN</span><h1>Acesso ao painel<span>.</span></h1><p>Entre para gerenciar o catálogo.</p><form method="post"><label>Senha<input type="password" name="password" required autofocus></label><button class="button button-purple" type="submit">Entrar <span>→</span></button></form><small>Senha local inicial: <code>admin</code></small></section></main>{% endblock %}
+

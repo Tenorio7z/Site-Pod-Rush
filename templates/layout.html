@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#080910">
+    <title>{% block title %}{{ store_name }}{% endblock %} · {{ store_name }}</title>
+    <meta name="description" content="{{ store_name }} — catálogo de produtos Pod Rush.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/shop.css') }}">{% if request.endpoint == 'home' %}
+    <script>try { if (!sessionStorage.getItem('podrushIntroSeen')) document.documentElement.classList.add('intro-pending') } catch (e) { }</script>
+    {% endif %}{% block head %}{% endblock %}
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header-inner"><a class="brand" href="{{ url_for('home') }}"><img
+                    src="{{ url_for('static',filename='img/podrush-logo.png') }}" alt=""><span><b>{{ store_name
+                        }}</b><small>{{ store_tagline }}</small></span></a><span
+                class="store-state {% if store_open %}is-open{% else %}is-closed{% endif %}"><i></i>{{ 'Aberto' if
+                store_open else 'Fechado' }}</span>{% if whatsapp %}<a class="header-whatsapp"
+                href="https://wa.me/{{ whatsapp }}" target="_blank" rel="noopener"><svg class="wa-icon"
+                    viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor"
+                        d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.1 1.6 5.9L0 24l6.5-1.7a11.9 11.9 0 0 0 5.6 1.4h.1C18.7 23.7 24 18.4 24 11.9a11.8 11.8 0 0 0-3.5-8.4ZM12.2 21.7a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.3-.4a9.8 9.8 0 1 1 8.5 4.7Zm5.4-7.3c-.3-.1-1.8-.9-2.1-1s-.5-.1-.7.1-.8 1-1 1.1-.4.2-.7.1a8.1 8.1 0 0 1-2.4-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6l.5-.6.3-.5c.1-.2 0-.4 0-.6l-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.2-1.2 2.8 1.3 3.2 1.5 3.4c.2.2 2.5 3.8 6.1 5.3.9.4 1.6.6 2.1.7.9.3 1.7.2 2.3.1.7-.1 1.8-.8 2.1-1.5.3-.7.3-1.3.2-1.5s-.3-.3-.6-.5Z" />
+                </svg><span>Chamar no WhatsApp</span></a>{% endif %}</div>
+    </header>
+    {% with messages=get_flashed_messages(with_categories=true) %}{% if messages %}<div class="flash-wrap">{% for
+        category,message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif
+    %}{% endwith %}
+    {% block content %}{% endblock %}
+    <footer class="site-footer">
+        <div class="footer-brand"><img src="{{ url_for('static',filename='img/podrush-logo.png') }}" alt=""><span>{{
+                store_name }} · {{ store_tagline }}</span></div>
+        <div class="footer-meta"><span>Produtos selecionados pelo Pod Rush</span><a
+                href="{{ url_for('admin_login') }}">Área do lojista</a></div>
+    </footer>{% block scripts %}{% endblock %}
+</body>
+
+</html>

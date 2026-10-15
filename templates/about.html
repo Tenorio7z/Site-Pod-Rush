@@ -1,0 +1,4 @@
+{% extends "layout.html" %}
+{% block title %}Sobre o Pod Rush{% endblock %}
+{% block content %}<main class="wrap page-main about-page"><img class="welcome-logo about-logo" src="{{ url_for('static', filename='img/podrush-logo.png') }}" alt="Pod Rush"><span class="eyebrow">POD RUSH · LOJA OFICIAL</span><h1>Produtos escolhidos<br>pelo Pod Rush<span>.</span></h1><p>Esta é a loja do Pod Rush: uma vitrine simples para produtos escolhidos pelo time e disponíveis para conhecer por aqui.</p><a class="button button-purple" href="{{ url_for('home') }}">Voltar ao início <span>→</span></a></main>{% endblock %}
+

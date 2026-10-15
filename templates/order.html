@@ -1,0 +1,5 @@
+{% extends "layout.html" %}
+{% block title %}Pedido recebido{% endblock %}
+{% block content %}
+<main class="wrap page-main confirmation-page"><div class="confirmation-mark">✓</div><span class="eyebrow">PEDIDO DE TESTE REGISTRADO</span><h1>Seu pedido já está por aqui<span>.</span></h1><p>Pedido <b>#{{ '%05d'|format(order.id) }}</b> registrado em {{ order.created_at[:16] }}. Nenhum pagamento foi cobrado.</p><section class="panel order-confirm-summary"><h2>O que vem aí</h2>{% for item in items %}<div class="checkout-item"><span>{{ item.quantity }} × {{ item.product_name }}</span><b>{{ (item.unit_price*item.quantity)|money }}</b></div>{% endfor %}<div class="summary-total"><span>Total de demonstração</span><b>{{ order.total|money }}</b></div><div class="order-address">Entrega para <b>{{ order.customer_name }}</b><br>{{ order.address }}, {{ order.city }} · {{ order.postal_code }}</div></section><a class="button button-dark" href="{{ url_for('home') }}">Voltar para a loja <span>→</span></a></main>
+{% endblock %}
