@@ -39,8 +39,8 @@ UPLOAD_DIR = ROOT / "static" / "uploads"
 if APP_ENV == "production":
     if len(os.environ.get("SECRET_KEY", "")) < 32:
         raise RuntimeError("Configure SECRET_KEY com pelo menos 32 caracteres aleatórios em produção.")
-    if len(os.environ.get("SHOP_ADMIN_PASSWORD", "")) < 14 or os.environ["SHOP_ADMIN_PASSWORD"] == "admin":
-        raise RuntimeError("Configure SHOP_ADMIN_PASSWORD com pelo menos 14 caracteres em produção.")
+    if len(os.environ.get("SHOP_ADMIN_PASSWORD", "")) < 8 or os.environ["SHOP_ADMIN_PASSWORD"] == "admin":
+        raise RuntimeError("Configure SHOP_ADMIN_PASSWORD com pelo menos 8 caracteres em produção.")
     if not USE_POSTGRES:
         raise RuntimeError("Configure DATABASE_URL para usar PostgreSQL em produção.")
 

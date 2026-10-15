@@ -29,7 +29,7 @@ git push -u origin main
 
 ## Publicar no Render
 
-O arquivo `render.yaml` configura um serviço Flask com Gunicorn e um PostgreSQL gerenciado. No Render, crie um **Blueprint** conectado ao repositório e confirme a criação dos recursos. Quando solicitado, informe `SHOP_ADMIN_PASSWORD` com pelo menos 14 caracteres. O Blueprint gera `SECRET_KEY` e conecta `DATABASE_URL` ao banco.
+O arquivo `render.yaml` configura um serviço Flask com Gunicorn e um PostgreSQL gerenciado. No Render, crie um **Blueprint** conectado ao repositório e confirme a criação dos recursos. Quando solicitado, informe `SHOP_ADMIN_PASSWORD` com pelo menos 8 caracteres. O Blueprint gera `SECRET_KEY` e conecta `DATABASE_URL` ao banco.
 
 O Postgres gratuito é adequado para experimentar, mas expira após 30 dias e não oferece backups. Antes de manter a loja ativa, atualize o plano do banco no Render e faça cópias de segurança. [Limitações dos serviços gratuitos no Render](https://render.com/docs/free).
 
